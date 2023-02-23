@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d7b1ab7ade1f41b6ad622f064bd7383c" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="DbTransportModel.TblCategory" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbTransportModel.TblCustomer" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbTransportModel.TblEmployee" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbTransportModel.TblProcess" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbTransportModel.TblProduct" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbTransportModel.TblTransportation" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="DbTransportModel.FK_TblTransportation_TblCategory1" ManuallyRouted="false" />
+        <AssociationConnector Association="DbTransportModel.FK_TblTransportation_TblCustomer1" ManuallyRouted="false" />
+        <AssociationConnector Association="DbTransportModel.FK_TblTransportation_TblEmployee1" ManuallyRouted="false" />
+        <AssociationConnector Association="DbTransportModel.FK_TblProcess_TblTransportation" ManuallyRouted="false" />
+        <AssociationConnector Association="DbTransportModel.FK_TblTransportation_TblProduct1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

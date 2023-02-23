@@ -1,0 +1,414 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DbTransportModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TblCategory">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TblCustomer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustomerSurname" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustomerCity" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustomerPhone" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TblEmployee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmployeeSurname" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmployeeDescription" Type="nvarchar" MaxLength="1000" />
+          <Property Name="EmployeeImage" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TblProcess">
+          <Key>
+            <PropertyRef Name="ProcessID" />
+          </Key>
+          <Property Name="ProcessID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Transportation" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TblProduct">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductSizeType" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductSize" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductDescription" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TblTransportation">
+          <Key>
+            <PropertyRef Name="TransportationID" />
+          </Key>
+          <Property Name="TransportationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer" Type="int" />
+          <Property Name="Category" Type="int" />
+          <Property Name="Product" Type="int" />
+          <Property Name="Employee" Type="int" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Departure" Type="nvarchar" MaxLength="50" />
+          <Property Name="Arrival" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_TblProcess_TblTransportation">
+          <End Role="TblTransportation" Type="Self.TblTransportation" Multiplicity="0..1" />
+          <End Role="TblProcess" Type="Self.TblProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblTransportation">
+              <PropertyRef Name="TransportationID" />
+            </Principal>
+            <Dependent Role="TblProcess">
+              <PropertyRef Name="Transportation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblTransportation_TblCategory1">
+          <End Role="TblCategory" Type="Self.TblCategory" Multiplicity="0..1" />
+          <End Role="TblTransportation" Type="Self.TblTransportation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCategory">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="TblTransportation">
+              <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblTransportation_TblCustomer1">
+          <End Role="TblCustomer" Type="Self.TblCustomer" Multiplicity="0..1" />
+          <End Role="TblTransportation" Type="Self.TblTransportation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCustomer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="TblTransportation">
+              <PropertyRef Name="Customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblTransportation_TblEmployee1">
+          <End Role="TblEmployee" Type="Self.TblEmployee" Multiplicity="0..1" />
+          <End Role="TblTransportation" Type="Self.TblTransportation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEmployee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TblTransportation">
+              <PropertyRef Name="Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblTransportation_TblProduct1">
+          <End Role="TblProduct" Type="Self.TblProduct" Multiplicity="0..1" />
+          <End Role="TblTransportation" Type="Self.TblTransportation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblProduct">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="TblTransportation">
+              <PropertyRef Name="Product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbTransportModelStoreContainer">
+          <EntitySet Name="TblCategory" EntityType="Self.TblCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblCustomer" EntityType="Self.TblCustomer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblEmployee" EntityType="Self.TblEmployee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblProcess" EntityType="Self.TblProcess" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblProduct" EntityType="Self.TblProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblTransportation" EntityType="Self.TblTransportation" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_TblProcess_TblTransportation" Association="Self.FK_TblProcess_TblTransportation">
+            <End Role="TblTransportation" EntitySet="TblTransportation" />
+            <End Role="TblProcess" EntitySet="TblProcess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblTransportation_TblCategory1" Association="Self.FK_TblTransportation_TblCategory1">
+            <End Role="TblCategory" EntitySet="TblCategory" />
+            <End Role="TblTransportation" EntitySet="TblTransportation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblTransportation_TblCustomer1" Association="Self.FK_TblTransportation_TblCustomer1">
+            <End Role="TblCustomer" EntitySet="TblCustomer" />
+            <End Role="TblTransportation" EntitySet="TblTransportation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblTransportation_TblEmployee1" Association="Self.FK_TblTransportation_TblEmployee1">
+            <End Role="TblEmployee" EntitySet="TblEmployee" />
+            <End Role="TblTransportation" EntitySet="TblTransportation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblTransportation_TblProduct1" Association="Self.FK_TblTransportation_TblProduct1">
+            <End Role="TblProduct" EntitySet="TblProduct" />
+            <End Role="TblTransportation" EntitySet="TblTransportation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DbTransportModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TblCategory">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TblTransportation" Relationship="Self.FK_TblTransportation_TblCategory1" FromRole="TblCategory" ToRole="TblTransportation" />
+        </EntityType>
+        <EntityType Name="TblCustomer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerSurname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TblTransportation" Relationship="Self.FK_TblTransportation_TblCustomer1" FromRole="TblCustomer" ToRole="TblTransportation" />
+        </EntityType>
+        <EntityType Name="TblEmployee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeSurname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TblTransportation" Relationship="Self.FK_TblTransportation_TblEmployee1" FromRole="TblEmployee" ToRole="TblTransportation" />
+        </EntityType>
+        <EntityType Name="TblProcess">
+          <Key>
+            <PropertyRef Name="ProcessID" />
+          </Key>
+          <Property Name="ProcessID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Transportation" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TblTransportation" Relationship="Self.FK_TblProcess_TblTransportation" FromRole="TblProcess" ToRole="TblTransportation" />
+        </EntityType>
+        <EntityType Name="TblProduct">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductSizeType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductSize" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TblTransportation" Relationship="Self.FK_TblTransportation_TblProduct1" FromRole="TblProduct" ToRole="TblTransportation" />
+        </EntityType>
+        <EntityType Name="TblTransportation">
+          <Key>
+            <PropertyRef Name="TransportationID" />
+          </Key>
+          <Property Name="TransportationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer" Type="Int32" />
+          <Property Name="Category" Type="Int32" />
+          <Property Name="Product" Type="Int32" />
+          <Property Name="Employee" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Departure" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Arrival" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TblCategory" Relationship="Self.FK_TblTransportation_TblCategory1" FromRole="TblTransportation" ToRole="TblCategory" />
+          <NavigationProperty Name="TblCustomer" Relationship="Self.FK_TblTransportation_TblCustomer1" FromRole="TblTransportation" ToRole="TblCustomer" />
+          <NavigationProperty Name="TblEmployee" Relationship="Self.FK_TblTransportation_TblEmployee1" FromRole="TblTransportation" ToRole="TblEmployee" />
+          <NavigationProperty Name="TblProcess" Relationship="Self.FK_TblProcess_TblTransportation" FromRole="TblTransportation" ToRole="TblProcess" />
+          <NavigationProperty Name="TblProduct" Relationship="Self.FK_TblTransportation_TblProduct1" FromRole="TblTransportation" ToRole="TblProduct" />
+        </EntityType>
+        <Association Name="FK_TblTransportation_TblCategory1">
+          <End Role="TblCategory" Type="Self.TblCategory" Multiplicity="0..1" />
+          <End Role="TblTransportation" Type="Self.TblTransportation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCategory">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="TblTransportation">
+              <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblTransportation_TblCustomer1">
+          <End Role="TblCustomer" Type="Self.TblCustomer" Multiplicity="0..1" />
+          <End Role="TblTransportation" Type="Self.TblTransportation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblCustomer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="TblTransportation">
+              <PropertyRef Name="Customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblTransportation_TblEmployee1">
+          <End Role="TblEmployee" Type="Self.TblEmployee" Multiplicity="0..1" />
+          <End Role="TblTransportation" Type="Self.TblTransportation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblEmployee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="TblTransportation">
+              <PropertyRef Name="Employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblProcess_TblTransportation">
+          <End Role="TblTransportation" Type="Self.TblTransportation" Multiplicity="0..1" />
+          <End Role="TblProcess" Type="Self.TblProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblTransportation">
+              <PropertyRef Name="TransportationID" />
+            </Principal>
+            <Dependent Role="TblProcess">
+              <PropertyRef Name="Transportation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TblTransportation_TblProduct1">
+          <End Role="TblProduct" Type="Self.TblProduct" Multiplicity="0..1" />
+          <End Role="TblTransportation" Type="Self.TblTransportation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TblProduct">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="TblTransportation">
+              <PropertyRef Name="Product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbTransportEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TblCategory" EntityType="Self.TblCategory" />
+          <EntitySet Name="TblCustomer" EntityType="Self.TblCustomer" />
+          <EntitySet Name="TblEmployee" EntityType="Self.TblEmployee" />
+          <EntitySet Name="TblProcess" EntityType="Self.TblProcess" />
+          <EntitySet Name="TblProduct" EntityType="Self.TblProduct" />
+          <EntitySet Name="TblTransportation" EntityType="Self.TblTransportation" />
+          <AssociationSet Name="FK_TblTransportation_TblCategory1" Association="Self.FK_TblTransportation_TblCategory1">
+            <End Role="TblCategory" EntitySet="TblCategory" />
+            <End Role="TblTransportation" EntitySet="TblTransportation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblTransportation_TblCustomer1" Association="Self.FK_TblTransportation_TblCustomer1">
+            <End Role="TblCustomer" EntitySet="TblCustomer" />
+            <End Role="TblTransportation" EntitySet="TblTransportation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblTransportation_TblEmployee1" Association="Self.FK_TblTransportation_TblEmployee1">
+            <End Role="TblEmployee" EntitySet="TblEmployee" />
+            <End Role="TblTransportation" EntitySet="TblTransportation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblProcess_TblTransportation" Association="Self.FK_TblProcess_TblTransportation">
+            <End Role="TblTransportation" EntitySet="TblTransportation" />
+            <End Role="TblProcess" EntitySet="TblProcess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblTransportation_TblProduct1" Association="Self.FK_TblTransportation_TblProduct1">
+            <End Role="TblProduct" EntitySet="TblProduct" />
+            <End Role="TblTransportation" EntitySet="TblTransportation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DbTransportModelStoreContainer" CdmEntityContainer="DbTransportEntities">
+          <EntitySetMapping Name="TblCategory">
+            <EntityTypeMapping TypeName="DbTransportModel.TblCategory">
+              <MappingFragment StoreEntitySet="TblCategory">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblCustomer">
+            <EntityTypeMapping TypeName="DbTransportModel.TblCustomer">
+              <MappingFragment StoreEntitySet="TblCustomer">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="CustomerSurname" ColumnName="CustomerSurname" />
+                <ScalarProperty Name="CustomerCity" ColumnName="CustomerCity" />
+                <ScalarProperty Name="CustomerPhone" ColumnName="CustomerPhone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblEmployee">
+            <EntityTypeMapping TypeName="DbTransportModel.TblEmployee">
+              <MappingFragment StoreEntitySet="TblEmployee">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="EmployeeSurname" ColumnName="EmployeeSurname" />
+                <ScalarProperty Name="EmployeeDescription" ColumnName="EmployeeDescription" />
+                <ScalarProperty Name="EmployeeImage" ColumnName="EmployeeImage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblProcess">
+            <EntityTypeMapping TypeName="DbTransportModel.TblProcess">
+              <MappingFragment StoreEntitySet="TblProcess">
+                <ScalarProperty Name="ProcessID" ColumnName="ProcessID" />
+                <ScalarProperty Name="Transportation" ColumnName="Transportation" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblProduct">
+            <EntityTypeMapping TypeName="DbTransportModel.TblProduct">
+              <MappingFragment StoreEntitySet="TblProduct">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductSizeType" ColumnName="ProductSizeType" />
+                <ScalarProperty Name="ProductSize" ColumnName="ProductSize" />
+                <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblTransportation">
+            <EntityTypeMapping TypeName="DbTransportModel.TblTransportation">
+              <MappingFragment StoreEntitySet="TblTransportation">
+                <ScalarProperty Name="TransportationID" ColumnName="TransportationID" />
+                <ScalarProperty Name="Customer" ColumnName="Customer" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Product" ColumnName="Product" />
+                <ScalarProperty Name="Employee" ColumnName="Employee" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Departure" ColumnName="Departure" />
+                <ScalarProperty Name="Arrival" ColumnName="Arrival" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
