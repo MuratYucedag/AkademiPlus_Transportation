@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DbTransportModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DbTransportModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="TblCategory">
           <Key>
             <PropertyRef Name="CategoryID" />
@@ -30,7 +30,7 @@
           <Property Name="EmployeeName" Type="nvarchar" MaxLength="50" />
           <Property Name="EmployeeSurname" Type="nvarchar" MaxLength="50" />
           <Property Name="EmployeeDescription" Type="nvarchar" MaxLength="1000" />
-          <Property Name="EmployeeImage" Type="nvarchar(max)" />
+          <Property Name="Employeeimage" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="TblProcess">
           <Key>
@@ -153,8 +153,7 @@
             <End Role="TblTransportation" EntitySet="TblTransportation" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DbTransportModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -185,8 +184,8 @@
           <Property Name="EmployeeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EmployeeSurname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EmployeeDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="EmployeeImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TblTransportation" Relationship="Self.FK_TblTransportation_TblEmployee1" FromRole="TblEmployee" ToRole="TblTransportation" />
+          <Property Name="Employeeimage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TblProcess">
           <Key>
@@ -344,11 +343,11 @@
           <EntitySetMapping Name="TblEmployee">
             <EntityTypeMapping TypeName="DbTransportModel.TblEmployee">
               <MappingFragment StoreEntitySet="TblEmployee">
+                <ScalarProperty Name="Employeeimage" ColumnName="Employeeimage" />
                 <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
                 <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
                 <ScalarProperty Name="EmployeeSurname" ColumnName="EmployeeSurname" />
                 <ScalarProperty Name="EmployeeDescription" ColumnName="EmployeeDescription" />
-                <ScalarProperty Name="EmployeeImage" ColumnName="EmployeeImage" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

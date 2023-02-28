@@ -24,7 +24,7 @@ namespace AkademiPlus_Transportation.Models
         public string EmployeeName { get; set; }
         public string EmployeeSurname { get; set; }
         public string EmployeeDescription { get; set; }
-        public string EmployeeImage { get; set; }
+        public string Employeeimage { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblTransportation> TblTransportation { get; set; }
