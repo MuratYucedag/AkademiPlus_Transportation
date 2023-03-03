@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DbTransportModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TblAbout">
+          <Key>
+            <PropertyRef Name="AboutID" />
+          </Key>
+          <Property Name="AboutID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SmallTitle" Type="nvarchar" MaxLength="100" />
+          <Property Name="LargeTitle" Type="nvarchar" MaxLength="100" />
+          <Property Name="AboutContent" Type="nvarchar" MaxLength="1000" />
+          <Property Name="AboutImage" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="TblCategory">
           <Key>
             <PropertyRef Name="CategoryID" />
@@ -126,6 +136,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="DbTransportModelStoreContainer">
+          <EntitySet Name="TblAbout" EntityType="Self.TblAbout" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblCategory" EntityType="Self.TblCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblCustomer" EntityType="Self.TblCustomer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblEmployee" EntityType="Self.TblEmployee" Schema="dbo" store:Type="Tables" />
@@ -314,7 +325,18 @@
             <End Role="TblProduct" EntitySet="TblProduct" />
             <End Role="TblTransportation" EntitySet="TblTransportation" />
           </AssociationSet>
+          <EntitySet Name="TblAbout" EntityType="DbTransportModel.TblAbout" />
         </EntityContainer>
+        <EntityType Name="TblAbout">
+          <Key>
+            <PropertyRef Name="AboutID" />
+          </Key>
+          <Property Name="AboutID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SmallTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LargeTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AboutContent" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="AboutImage" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -384,6 +406,17 @@
                 <ScalarProperty Name="Arrival" ColumnName="Arrival" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblAbout">
+            <EntityTypeMapping TypeName="DbTransportModel.TblAbout">
+              <MappingFragment StoreEntitySet="TblAbout">
+                <ScalarProperty Name="AboutImage" ColumnName="AboutImage" />
+                <ScalarProperty Name="AboutContent" ColumnName="AboutContent" />
+                <ScalarProperty Name="LargeTitle" ColumnName="LargeTitle" />
+                <ScalarProperty Name="SmallTitle" ColumnName="SmallTitle" />
+                <ScalarProperty Name="AboutID" ColumnName="AboutID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

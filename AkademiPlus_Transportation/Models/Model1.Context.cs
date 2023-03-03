@@ -31,5 +31,6 @@ namespace AkademiPlus_Transportation.Models
         public virtual DbSet<TblProcess> TblProcess { get; set; }
         public virtual DbSet<TblProduct> TblProduct { get; set; }
         public virtual DbSet<TblTransportation> TblTransportation { get; set; }
+        public virtual DbSet<TblAbout> TblAbout { get; set; }
     }
 }
